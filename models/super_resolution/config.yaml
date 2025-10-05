@@ -1,0 +1,36 @@
+# Configuration for the Diffusion Super-Resolution Model
+
+# --- Data Configuration ---
+data:
+  train_dir: "data/train"
+  test_image: "data/test/test_image.png"
+  img_size: 64
+  upscale_factor: 2
+
+# --- Model Architecture ---
+model:
+  # Timesteps for the diffusion process
+  timesteps: 1000
+  # U-Net configuration
+  in_channels: 6
+  out_channels: 3
+  channel_multipliers: [1, 2, 4] # Defines channel size at each resolution
+
+# --- Training Hyperparameters ---
+training:
+  epochs: 100
+  batch_size: 16
+  learning_rate: 0.0002
+  # Save a sample image every N epochs
+  save_image_every: 5
+  save_model_every: 10
+
+# --- Logging and Output ---
+output:
+  model_path: "saved_models/diffusion_upscaler.pth"
+  output_dir: "output"
+  log_dir: "/home/jovyan/logs/fit/diffusion_super_res"
+
+# --- Inference Configuration ---
+inference:
+  model_path: "saved_models/diffusion_upscaler_20251005_060321.pth"
